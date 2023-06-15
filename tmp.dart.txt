@@ -1,0 +1,63 @@
+import 'package:flutter/material.dart';
+
+import 'components/contactSection.dart';
+import 'components/nameSection.dart';
+
+void main() => runApp(const Ass1());
+
+class Ass1 extends StatelessWidget {
+  const Ass1({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Color color = Theme.of(context).primaryColor;
+    return MaterialApp(
+      title: 'Assignment 1',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: LayoutBuilder(
+        builder: (context, constraints) {
+          final screenHeight = constraints.maxHeight;
+          final statusBarHeight = MediaQuery.of(context).padding.top;
+          final appBarHeight = AppBar().preferredSize.height;
+          final bodyHeight = screenHeight - statusBarHeight - appBarHeight;
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text(
+                'Personal card',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w700,
+                  fontSize: 26.0,
+                ),
+              ),
+            ),
+            body: ListView(
+              children: [
+                Container(
+                  height: bodyHeight * 0.4, // 50% of body's height
+                  color: Colors.red, // to visualize the Container
+                ),
+                Container(
+                  width: 175,
+                  height: 175,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  clipBehavior: Clip.hardEdge,
+                  child: Image.asset(
+                    'images/Chris.jpg',
+                    fit: BoxFit.scaleDown,
+                  ),
+                ),
+                nameSection,
+                contactSection,
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
